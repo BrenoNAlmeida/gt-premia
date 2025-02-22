@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('carteiras', function (Blueprint $table) {
             $table->id();
+            $table->float('saldo');
+            $table->foreignId('proprietario_id')->constrained('users');
             $table->timestamps();
         });
     }

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('valors', function (Blueprint $table) {
+        Schema::create('valores', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->float('cotacao');
+            $table->string('imagem_path');
+            $table->string('imagem_nome');
             $table->timestamps();
         });
     }

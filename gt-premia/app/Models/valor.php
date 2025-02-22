@@ -9,4 +9,11 @@ class valor extends Model
 {
     /** @use HasFactory<\Database\Factories\ValorFactory> */
     use HasFactory;
+
+    protected $table = 'valores';
+
+    protected $fillable = [
+        'nome',
+        'cotacao',
+    ];
 }

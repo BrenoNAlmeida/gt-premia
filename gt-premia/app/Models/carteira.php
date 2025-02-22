@@ -9,4 +9,14 @@ class carteira extends Model
 {
     /** @use HasFactory<\Database\Factories\CarteiraFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'saldo',
+        'proprietario_id',
+    ];
+
+    public function proprietario()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

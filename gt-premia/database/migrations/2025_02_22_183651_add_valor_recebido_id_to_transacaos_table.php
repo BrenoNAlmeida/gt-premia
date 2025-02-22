@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carteiras', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('transacoes', function (Blueprint $table) {
+            $table->foreignId('valor_recebido_id')->constrained('valores');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carteiras');
+        Schema::table('transacoes', function (Blueprint $table) {
+            //
+        });
     }
 };

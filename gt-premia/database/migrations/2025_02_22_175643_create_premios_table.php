@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('premios', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('descricao');
+            $table->string('status');
+            $table->string('imagem_path');
+            $table->string('imagem_nome');
+            $table->float('preco');
+            $table->integer('quantidade');
+            $table->foreignId('retirado_por')->constrained('users');
             $table->timestamps();
         });
     }

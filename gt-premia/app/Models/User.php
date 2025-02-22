@@ -20,7 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'cpf',
         'password',
+        'carteira_id',
     ];
 
     /**
@@ -45,4 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //relacionamento com a carteira
+    public function carteira()
+    {
+        return $this->belongsTo(Carteira::class);
+    }
+
+
 }
