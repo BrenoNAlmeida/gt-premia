@@ -12,8 +12,11 @@ class PremioController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $premios = premio::all();
+
+        //redireciona para a view index.blade.php
+        return view('premio.index' , ['premios' => $premios]);
     }
 
     /**
@@ -62,5 +65,45 @@ class PremioController extends Controller
     public function destroy(premio $premio)
     {
         //
+    }
+
+    public function solicitar_retirada(premio $premio)
+    {
+        $carteira = auth()->user()->carteira;   
+
+        //verificar se o prêmio já foi solicitado
+        if($premio->status == 'solicitado'){
+            return redirect()->route('premio.index')->with('error', 'Prêmio já solicitado!');
+        }
+        //verificar se o usuário tem saldo suficiente para solicitar a retirada
+        if($carteira->saldo < $premio->preco){
+            return redirect()->route('premio.index')->with('error', 'Saldo insuficiente para solicitar a retirada!');
+        }
+
+        //usar o método update para atualizar o status do prêmio para "solicitado"
+        $premio->update([
+            'status' => 'solicitado',
+            'retirado_por' => auth()->user()->id
+        ]);
+
+        //redirecionar para a rota premio.index com uma mensagem de sucesso
+        return redirect()->route('premio.index')->with('success', 'Solicitação de retirada realizada com sucesso!');
+    }
+
+    public function aprovar_retidada(premio $premio)
+    {
+        //verificar se o usuário autenticado é um administrador
+        if(auth()->user()->tipo != 'rh'){
+            return redirect()->route('premio.index')->with('error', 'Você não tem permissão para aprovar retiradas!');
+        }
+
+        //usar o método update para atualizar o status do prêmio para "aprovado"
+        $premio->update([
+            'status' => 'aprovado',
+            'aprovado_por' => auth()->user()->id
+        ]);
+
+        //redirecionar para a rota premio.index com uma mensagem de sucesso
+        return redirect()->route('premio.index')->with('success', 'Retirada aprovada com sucesso!');
     }
 }

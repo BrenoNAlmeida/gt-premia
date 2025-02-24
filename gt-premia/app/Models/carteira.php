@@ -11,7 +11,9 @@ class carteira extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'saldo',
+        'saldo_retido',
         'proprietario_id',
     ];
 
