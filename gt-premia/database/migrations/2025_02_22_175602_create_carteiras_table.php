@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('carteiras', function (Blueprint $table) {
             $table->id();
-            $table->float('saldo');
+            $table->float('saldo')->default(0);
             $table->float('saldo_retido')->default(0);
-            $table->foreignId('proprietario_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

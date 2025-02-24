@@ -15,6 +15,7 @@ class transacao extends Model
     protected $fillable = [
         'tipo',
         'montante',
+        'descricao',
         'valor_recebido_id',
         'carteira_id',
         'premio_retirado_id',

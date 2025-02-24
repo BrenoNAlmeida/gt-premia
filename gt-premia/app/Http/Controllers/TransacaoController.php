@@ -6,6 +6,7 @@ use App\Models\transacao;
 use App\Http\Requests\StoretransacaoRequest;
 use App\Http\Requests\UpdatetransacaoRequest;
 use App\Models\carteira;
+use App\Models\valor;
 use Illuminate\Http\Request;
 
 class TransacaoController extends Controller
@@ -33,9 +34,24 @@ class TransacaoController extends Controller
      */
     public function store(StoretransacaoRequest $request)
     {
-        dd($request->all());
-    }
+        $data = $request->all();
+        $carteira = carteira::find($data['carteira_id']);
+        $transacao = new transacao();
+        if($data['tipo'] == 'entrada'){
+            $valor_recebido = valor::find($data['valor']);
+            $transacao->tipo = 'entrada';
+            $transacao->descricao = 'Adição de saldo';
+            $transacao->valor_recebido_id = $valor_recebido->id;
+            $transacao->carteira_id = $carteira->id;
+            $transacao->montante = $valor_recebido->cotacao;
+            $transacao->save();
 
+            $carteira->saldo += $valor_recebido->cotacao;
+            $carteira->save();
+        }
+        //redireciona para a view a mesma view
+        return redirect()->route('usuarios.index');
+    }
     /**
      * Display the specified resource.
      */

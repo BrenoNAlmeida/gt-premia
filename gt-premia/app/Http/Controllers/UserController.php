@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\carteira;
 use App\Models\transacao;
 use App\Models\User;
+use App\Models\valor;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -42,8 +43,9 @@ class UserController extends Controller
 
         $usuario = $user;
         $transacoes = transacao::where('carteira_id', $usuario->carteira_id)->get();
-        $carteira = carteira::where('proprietario_id', $usuario->id)->first();
-        return view('usuarios.show', compact('usuario', 'transacoes', 'carteira'));
+        $carteira = carteira::where('user_id', $usuario->id)->first();
+        $valores = valor::all();
+        return view('usuarios.show', compact('usuario', 'transacoes', 'carteira', 'valores'));
     }
 
     /**

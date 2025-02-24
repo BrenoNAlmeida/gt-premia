@@ -43,10 +43,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         $carteira = Carteira::create([
-            'proprietario_id' => $user->id,
-            'saldo' => 0,
+            'user_id' => $user->id,
         ]);
         $user->carteira_id = $carteira->id;
         $user->save();  

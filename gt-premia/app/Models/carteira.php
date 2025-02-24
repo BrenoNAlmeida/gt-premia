@@ -14,7 +14,7 @@ class carteira extends Model
         'id',
         'saldo',
         'saldo_retido',
-        'proprietario_id',
+        'user_id',
     ];
 
     public function proprietario()

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('transacoes', function (Blueprint $table) {
             $table->id();
+            $table->string('status')->default('aprovado');
             $table->foreignId('carteira_id')->nullable()->constrained('carteiras');
-            $table->foreignId('premio_retirado_id')->nullable()->constrained('users');
+            $table->foreignId('premio_retirado_id')->nullable()->constrained('premios');
+            $table->string('descricao')->nullable();
             $table->string('tipo');
             $table->float('montante')->nullable();
             $table->timestamps();

@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('premio.index')" :active="request()->routeIs('premios.index')">
                         {{ __('Premios') }}
                     </x-nav-link>
-                    @if(auth()->user()->hasRole('admin'))
+                    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('rh'))
                     <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
@@ -32,7 +32,7 @@
                 <div class="flex items
                 -center">
                     <div class="text-gray-800 dark:text-gray-200 font-semibold">
-                        Saldo: {{ number_format(Auth::user()->saldo, 2, ',', '.') }} GT-Coins
+                        Saldo: {{ number_format(Auth::user()->carteira->saldo, 2, ',', '.') }} GT-Coins
                     </div>
                 </div>
 
