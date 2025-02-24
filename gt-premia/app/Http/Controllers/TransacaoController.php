@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\transacao;
 use App\Http\Requests\StoretransacaoRequest;
 use App\Http\Requests\UpdatetransacaoRequest;
+use App\Models\carteira;
+use Illuminate\Http\Request;
 
 class TransacaoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(carteira $carteira)
     {
-        //
+        
+        return view('transacao.modal_adicionar_saldo', compact('carteira'));
+
     }
 
     /**
@@ -29,7 +33,7 @@ class TransacaoController extends Controller
      */
     public function store(StoretransacaoRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -62,5 +66,10 @@ class TransacaoController extends Controller
     public function destroy(transacao $transacao)
     {
         //
+    }
+
+    public function adicionar_saldo(Request $request)
+    {
+        return view('transacao.adicionar_saldo');
     }
 }
