@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carteiras', function (Blueprint $table) {
-            $table->id();
-            $table->float('saldo');
-            $table->float('saldo_retido')->default(0);
-            $table->foreignId('proprietario_id')->constrained('users');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('carteira_id')->nullable()->constrained('carteiras');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carteiras');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

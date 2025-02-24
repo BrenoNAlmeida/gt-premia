@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->float('cotacao');
-            $table->string('imagem_path');
-            $table->string('imagem_nome');
+            $table->string('imagem_path')->nullable();
+            $table->string('imagem_nome')->nullable();
             $table->timestamps();
         });
     }

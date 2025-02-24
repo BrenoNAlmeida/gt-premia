@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('premios', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('descricao');
+            $table->string('descricao')->nullable();
             $table->string('status');
-            $table->string('imagem_path');
-            $table->string('imagem_nome');
+            $table->string('imagem_path')->nullable();
+            $table->string('imagem_nome')->nullable();
             $table->float('preco');
-            $table->integer('quantidade');
-            $table->foreignId('retirado_por')->constrained('users');
+            $table->integer('quantidade')->nullable();
+            $table->foreignId('retirado_por')->nullable()->constrained('users');
             $table->timestamps();
         });
     }
