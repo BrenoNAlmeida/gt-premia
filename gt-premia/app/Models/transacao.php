@@ -15,6 +15,7 @@ class transacao extends Model
     protected $fillable = [
         'tipo',
         'montante',
+        'status',
         'descricao',
         'valor_recebido_id',
         'carteira_id',
@@ -33,7 +34,7 @@ class transacao extends Model
 
     public function premio_retirado()
     {
-        return $this->belongsTo(Valor::class);
+        return $this->belongsTo(premio::class, 'premio_retirado_id', 'id');
     }
 
 

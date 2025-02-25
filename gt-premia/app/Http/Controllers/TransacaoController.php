@@ -14,12 +14,19 @@ class TransacaoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(carteira $carteira)
+    public function index()
     {
-        
-        return view('transacao.modal_adicionar_saldo', compact('carteira'));
+        if(auth()->user()->hasRole('colaborador')){
+            $transacoes = transacao::orderBy('status', 'desc')->get();
+            return view('transacao.index', ['transacoes' => $transacoes]);
+        }
+        else{
+            $transacoes = transacao::orderBy('status', 'desc')->get();
+            return view('transacao.index', ['transacoes' => $transacoes]);
+        }
 
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -51,6 +58,29 @@ class TransacaoController extends Controller
         }
         //redireciona para a view a mesma view
         return redirect()->route('usuarios.index');
+    }
+
+    public function aprovar (transacao $transacao){
+        $transacao->status = 'aprovado';
+        $transacao->save();
+
+        $carteira = carteira::find($transacao->carteira_id);
+        $carteira->saldo_retido -= $transacao->montante;
+        $carteira->save();
+
+
+        return redirect()->route('transacao.index');
+    }
+
+    public function reprovar (transacao $transacao){
+        $transacao->status = 'reprovado';
+        $transacao->save();
+
+        $carteira = carteira::find($transacao->carteira_id);
+        $carteira->saldo += $transacao->montante;
+        $carteira->saldo_retido -= $transacao->montante;
+        $carteira->save();
+        return redirect()->route('transacao.index');
     }
     /**
      * Display the specified resource.

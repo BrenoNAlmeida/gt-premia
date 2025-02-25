@@ -72,14 +72,14 @@ class PremioController extends Controller
     public function solicitar_retirada(premio $premio)
     {
         auth()->user()->assignRole('rh');
-        //auth()->user()->assignRole('admin');
+        // auth()->user()->assignRole('admin');
         $carteira = carteira::where('user_id', auth()->user()->id)->first();  
         //verificar se o prêmio já foi solicitado
         if($premio->status == 'indisponivel'){
             return redirect()->route('premio.index')->with('error', 'Prêmio já solicitado!');
         }
         //verificar se o usuário tem saldo suficiente para solicitar a retirada
-        if($carteira->saldo > $premio->preco){
+        if($carteira->saldo >= $premio->preco){
             //atualiza carteira e deixa saldo como retido
             $carteira->saldo -= $premio->preco;
             $carteira->saldo_retido += $premio->preco;

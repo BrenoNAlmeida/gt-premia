@@ -23,6 +23,9 @@
                         {{ __('Usuarios') }}
                     </x-nav-link>
                     @endif
+                    <x-nav-link :href="route('transacao.index')" :active="request()->routeIs('transacao.index')">
+                        {{ __('Transações') }}
+                    </x-nav-link>
                 </div>
             </div>
 

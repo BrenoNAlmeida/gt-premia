@@ -17,7 +17,7 @@ class carteira extends Model
         'user_id',
     ];
 
-    public function proprietario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

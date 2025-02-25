@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('usuarios.destroy');
 
     //  transacao
-    Route::get('/transacao/{carteira}', [TransacaoController::class, 'index'])->name('transacao.index');
+    Route::get('/transacao', [TransacaoController::class, 'index'])->name('transacao.index');
     
     Route::get('/transacao/create', [TransacaoController::class, 'create'])->name('transacao.create');
     Route::post('/transacao', [TransacaoController::class, 'store'])->name('transacao.store');
@@ -47,8 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/transacao/{transacao}', [TransacaoController::class, 'destroy'])->name('transacao.destroy');
     Route::post('/transacao/{transacao}/aprovar', [TransacaoController::class, 'aprovar'])->name('transacao.aprovar');
     Route::post('/transacao/{transacao}/reprovar', [TransacaoController::class, 'reprovar'])->name('transacao.reprovar');
-    Route::post('/transacao/{transacao}/cancelar', [TransacaoController::class, 'cancelar'])->name('transacao.cancelar');
-    Route::post('/transacao/{transacao}/estornar', [TransacaoController::class, 'estornar'])->name('transacao.estornar');
     
 });
 
