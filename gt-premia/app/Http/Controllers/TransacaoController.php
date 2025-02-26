@@ -16,12 +16,14 @@ class TransacaoController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('colaborador')){
+        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('rg')){
             $transacoes = transacao::orderBy('status', 'desc')->get();
             return view('transacao.index', ['transacoes' => $transacoes]);
+            
         }
         else{
-            $transacoes = transacao::orderBy('status', 'desc')->get();
+            $transacoes = transacao::where('carteira_id', auth()->user()->carteira->id)
+            ->orderBy('status', 'desc')->get();
             return view('transacao.index', ['transacoes' => $transacoes]);
         }
 

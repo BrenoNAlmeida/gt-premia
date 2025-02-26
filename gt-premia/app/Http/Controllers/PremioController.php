@@ -71,8 +71,8 @@ class PremioController extends Controller
 
     public function solicitar_retirada(premio $premio)
     {
-        auth()->user()->assignRole('rh');
-        // auth()->user()->assignRole('admin');
+        //auth()->user()->assignRole('rh');
+        //auth()->user()->assignRole('admin');
         $carteira = carteira::where('user_id', auth()->user()->id)->first();  
         //verificar se o prêmio já foi solicitado
         if($premio->status == 'indisponivel'){

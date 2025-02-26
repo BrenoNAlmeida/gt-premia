@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\transacao;
+use App\Models\valor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,13 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         $transacoes = transacao::where('carteira_id', $request->user()->carteira->id)->get();
+        $carteira = auth()->user()->carteira;
+        $valores = valor::all();
         return view('profile.edit', [
             'user' => $request->user(),
-            'transacoes' => $transacoes
+            'transacoes' => $transacoes,
+            'carteira' => $carteira,
+            'valores' => $valores
         ]);
     }
 
