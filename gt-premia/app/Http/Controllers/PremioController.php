@@ -7,6 +7,7 @@ use App\Http\Requests\StorepremioRequest;
 use App\Http\Requests\UpdatepremioRequest;
 use App\Models\carteira;
 use App\Models\transacao;
+use Illuminate\Http\Request;
 
 class PremioController extends Controller
 {
@@ -26,15 +27,23 @@ class PremioController extends Controller
      */
     public function create()
     {
-        //
+        return view('premio.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepremioRequest $request)
+    public function store(Request $request)
     {
-        //
+        $premio = new premio();
+        $premio->nome = $request['nome'];
+        $premio->preco = $request['preco'];
+        $premio->status = $request['status'];
+        $premio->quantidade = $request['quantidade'];
+        $premio->save();
+
+        //redireciona para a rota premio.index com uma mensagem de sucesso
+        return redirect()->route('premio.index');
     }
 
     /**
@@ -50,15 +59,16 @@ class PremioController extends Controller
      */
     public function edit(premio $premio)
     {
-        //
+        return view('premio.edit', ['premio' => $premio]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepremioRequest $request, premio $premio)
+    public function update(Request $request, premio $premio)
     {
-        //
+        $premio->update($request->all());
+        return redirect()->route('premio.index');
     }
 
     /**
