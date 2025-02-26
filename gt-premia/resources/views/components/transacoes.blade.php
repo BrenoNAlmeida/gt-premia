@@ -116,7 +116,7 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900 dark:text-gray-100">{{ $transacao->created_at }}</div>
+                    <div class="text-sm text-gray-900 dark:text-gray-100">{{ \Carbon\Carbon::parse($transacao->created_at)->format('d/m/Y') }}</div>
                     </td>
                 </tr>
                 @endforeach
