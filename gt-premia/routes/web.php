@@ -30,11 +30,13 @@ Route::middleware('auth')->group(function () {
     Route::post('premio/{premio}/solicitar_retirada', [PremioController::class, 'solicitar_retirada'])->name('premio.solicitar_retirada');
 
     Route::get('/usuarios', [UserController::class, 'index'])->name('usuarios.index');
+    Route::post('/usuarios/store', [UserController::class, 'store'])->name('usuarios.store');
     Route::get('/usuarios/create', [UserController::class, 'create'])->name('usuarios.create');
     Route::get('/usuarios/{user}', [UserController::class, 'show'])->name('usuarios.show');
     Route::get('/usuarios/{user}/edit', [UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{user}', [UserController::class, 'update'])->name('usuarios.update');
     Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+
 
     //  transacao
     Route::get('/transacao', [TransacaoController::class, 'index'])->name('transacao.index');

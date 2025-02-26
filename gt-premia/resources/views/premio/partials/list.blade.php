@@ -55,9 +55,9 @@
                                         Editar
                                     </a>
 
-                                    <a href="{{ route('premio.show', $premio->id) }}" class="bg-yellow-600 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded">
+                                    <!-- <a href="{{ route('premio.show', $premio->id) }}" class="bg-yellow-600 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded">
                                         Detalhes
-                                    </a>
+                                    </a> -->
 
                                 </td>
                             </tr>
