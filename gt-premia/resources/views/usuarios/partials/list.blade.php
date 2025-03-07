@@ -14,9 +14,9 @@
                                 <th class="text-left px-4 py-2">Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-600">
+                        <tbody class="divide-y divide-gray-900">
                             @foreach ($usuarios as $usuario)
-                            <tr class="hover:bg-gray-700">
+                            <tr class="hover:bg-gray-200 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">{{ $usuario->name }}</td>
                                 <td class="px-4 py-2">{{ $usuario->email }}</td>
                             

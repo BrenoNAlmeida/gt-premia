@@ -18,7 +18,7 @@
                         </thead>
                         <tbody class="divide-y divide-gray-600">
                             @foreach ($premios as $premio)
-                            <tr class="hover:bg-gray-700">
+                            <tr class="hover:bg-gray-200 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2">{{ $premio->nome }}</td>
 
                                 @if($premio->status == 'disponivel')
@@ -50,11 +50,11 @@
                                             Retirar
                                         </button>
                                     </form>
-
+                                    @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('rh'))
                                     <a href="{{ route('premio.edit', $premio->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-1">
                                         Editar
                                     </a>
-
+                                    @endif
                                     <!-- <a href="{{ route('premio.show', $premio->id) }}" class="bg-yellow-600 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded">
                                         Detalhes
                                     </a> -->
