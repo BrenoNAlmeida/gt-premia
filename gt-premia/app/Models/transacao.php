@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\valor;
+use App\Models\carteira;
+use App\Models\premio;
 
 class transacao extends Model
 {
@@ -24,12 +27,12 @@ class transacao extends Model
 
     public function valor_recebido()
     {
-        return $this->belongsTo(Valor::class);
+        return $this->belongsTo(valor::class);
     }
 
     public function carteira()
     {
-        return $this->belongsTo(Carteira::class);
+        return $this->belongsTo(carteira::class);
     }
 
     public function premio_retirado()

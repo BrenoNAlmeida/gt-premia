@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
 use App\Models\User;
-use App\Models\Carteira;
+use App\Models\carteira;
 
 class UserSeeder extends Seeder
 {
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make(preg_replace('/\D/', '', $record['CPF'])),
             ]);
 
-            Carteira::create([
+            carteira::create([
                 'user_id' => $user->id,
                 'saldo' => 0,
                 'saldo_retido' => 0,

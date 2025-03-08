@@ -56,7 +56,7 @@ class UserController extends Controller
         ]);
         $user->assignRole($request['grupo']);
 
-        $carteira = Carteira::create([
+        $carteira = carteira::create([
             'user_id' => $user->id,
         ]);
         $user->carteira_id = $carteira->id;

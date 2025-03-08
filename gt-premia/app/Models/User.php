@@ -57,7 +57,7 @@ class User extends Authenticatable
     //relacionamento com a carteira
     public function carteira()
     {
-        return $this->hasOne(Carteira::class);
+        return $this->hasOne(carteira::class);
 
     }
 
