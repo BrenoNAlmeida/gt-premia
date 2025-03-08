@@ -28,7 +28,6 @@
             </div>
         </header>
         @endisset
-
         <!-- Page Content -->
         <main>
             @if (session('success'))
@@ -39,7 +38,7 @@
             <script>
                 setTimeout(function() {
                     document.getElementById('success-message').style.display = 'none';
-                }, 4000); // 5000 milissegundos = 5 segundos
+                }, 4000);
             </script>
             @endif
             

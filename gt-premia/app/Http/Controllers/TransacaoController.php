@@ -59,6 +59,7 @@ class TransacaoController extends Controller
             $carteira->save();
         }
         //redireciona para a view a mesma view
+        session()->flash('success', 'GTcoins adicionados com sucesso');
         return redirect()->route('usuarios.index');
     }
 
@@ -70,7 +71,7 @@ class TransacaoController extends Controller
         $carteira->saldo_retido -= $transacao->montante;
         $carteira->save();
 
-
+        session()->flash('success', 'transação aprovada com sucesso');
         return redirect()->route('transacao.index');
     }
 
@@ -82,6 +83,7 @@ class TransacaoController extends Controller
         $carteira->saldo += $transacao->montante;
         $carteira->saldo_retido -= $transacao->montante;
         $carteira->save();
+        session()->flash('success', 'transação reprovada com sucesso');
         return redirect()->route('transacao.index');
     }
     /**

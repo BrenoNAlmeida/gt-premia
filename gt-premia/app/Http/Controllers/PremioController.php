@@ -43,6 +43,8 @@ class PremioController extends Controller
         $premio->save();
 
         //redireciona para a rota premio.index com uma mensagem de sucesso
+        session()->flash('success', 'Premio cadastrado com sucesso');
+
         return redirect()->route('premio.index');
     }
 
@@ -68,6 +70,8 @@ class PremioController extends Controller
     public function update(Request $request, premio $premio)
     {
         $premio->update($request->all());
+        session()->flash('success', 'Premio atualizado com sucesso');
+
         return redirect()->route('premio.index');
     }
 
@@ -81,8 +85,6 @@ class PremioController extends Controller
 
     public function solicitar_retirada(premio $premio)
     {
-        //auth()->user()->assignRole('rh');
-        //auth()->user()->assignRole('admin');
         $carteira = carteira::where('user_id', auth()->user()->id)->first();  
         //verificar se o prêmio já foi solicitado
         if($premio->status == 'indisponivel'){

@@ -63,7 +63,7 @@ class UserController extends Controller
         $user->save();  
 
         event(new Registered($user));
-
+        session()->flash('success', 'Usuario cadastrado com sucesso');
         return redirect()->route('usuarios.index');
 
     }
@@ -75,8 +75,8 @@ class UserController extends Controller
     {   
 
         $usuario = $user;
-        $transacoes = transacao::where('carteira_id', $usuario->carteira_id)->get();
         $carteira = carteira::where('user_id', $usuario->id)->first();
+        $transacoes = transacao::where('carteira_id', $carteira->id)->get();
         $valores = valor::all();
         return view('usuarios.show', compact('usuario', 'transacoes', 'carteira', 'valores'));
     }
@@ -93,12 +93,15 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, User $User)
-    {
+    {        
+
         //atualiza os dados
         $request['cpf'] = preg_replace("/[^0-9]/", "", $request['cpf']);
         $User->update($request->all());
         $User->syncRoles($request['grupo']);
+        session()->flash('success', 'Usuario atualizado com sucesso');
         return redirect()->route('usuarios.index');
+
 
     }
 
@@ -110,10 +113,11 @@ class UserController extends Controller
         //
     }
 
-    public function resetar_senha(User $user)
+    public function resetar_senha(Request $request, User $user)
     {
         $user->password = Hash::make($user->cpf);
         $user->save();
+        session()->flash('success', 'Senha resetada com sucesso');
         return redirect()->route('usuarios.index');
     }
 }
