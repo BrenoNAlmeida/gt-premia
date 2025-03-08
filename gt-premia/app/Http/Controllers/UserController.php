@@ -97,6 +97,7 @@ class UserController extends Controller
         //atualiza os dados
         $request['cpf'] = preg_replace("/[^0-9]/", "", $request['cpf']);
         $User->update($request->all());
+        $User->syncRoles($request['grupo']);
         return redirect()->route('usuarios.index');
 
     }
