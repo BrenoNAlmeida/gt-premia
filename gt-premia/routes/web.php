@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PremioController;
 use App\Http\Controllers\TransacaoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,8 +26,20 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transacao', [TransacaoController::class, 'index'])->name('transacao.index');
 
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+
     
     Route::middleware(['role:rh|admin'])->group(function () { 
+
+        //feedback
+        Route::post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
+        Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
+        Route::get('/feedback/{feedback}', [FeedbackController::class, 'show'])->name('feedback.show');
+        Route::get('/feedback/{feedback}/edit', [FeedbackController::class, 'edit'])->name('feedback.edit');
+        Route::put('/feedback/{feedback}', [FeedbackController::class, 'update'])->name('feedback.update');
+        Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+
+
         //  premio
         Route::get('/premio/create', [PremioController::class, 'create'])->name('premio.create');
         Route::post('/premio/store', [PremioController::class, 'store'])->name('premio.store');

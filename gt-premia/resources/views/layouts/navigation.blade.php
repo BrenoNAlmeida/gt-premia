@@ -26,6 +26,9 @@
                     <x-nav-link :href="route('transacao.index')" :active="request()->routeIs('transacao.index')">
                         {{ __('Transações') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback.index')">
+                        {{ __('Feedback') }}
+                    </x-nav-link>
                 </div>
             </div>
 

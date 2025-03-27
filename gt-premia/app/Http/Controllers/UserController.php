@@ -9,6 +9,7 @@ use App\Models\valor;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Models\feedback;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
@@ -78,7 +79,8 @@ class UserController extends Controller
         $carteira = carteira::where('user_id', $usuario->id)->first();
         $transacoes = transacao::where('carteira_id', $carteira->id)->get();
         $valores = valor::all();
-        return view('usuarios.show', compact('usuario', 'transacoes', 'carteira', 'valores'));
+        $feedbacks = feedback::where('user_id', $usuario->id)->get();
+        return view('usuarios.show', compact('usuario', 'transacoes', 'carteira', 'valores', 'feedbacks'));
     }
 
     /**
