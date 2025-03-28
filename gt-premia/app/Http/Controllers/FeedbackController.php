@@ -55,7 +55,7 @@ class FeedbackController extends Controller
      */
     public function edit(feedback $feedback)
     {
-        //
+        
     }
 
     /**
@@ -63,7 +63,7 @@ class FeedbackController extends Controller
      */
     public function update(UpdatefeedbackRequest $request, feedback $feedback)
     {
-        //
+        dd($request->all());
     }
 
     /**
