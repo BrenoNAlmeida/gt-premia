@@ -56,7 +56,7 @@
                                 Ver
                             </button>
                             <button
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                 @click="
                                     feedbackId = {{ $feedback->id }};
                                     feedback = {{ json_encode($feedback->feedback) }};
@@ -170,7 +170,7 @@
                         x-model="feedback"
                         class="mt-2 w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-gray-200"
                         rows="4"
-                        value="{{ $feedback->feedback }}"
+                        value="{{ $feedback->feedback ?? ''}}"
                         placeholder="Digite seu feedback..."
                         required></textarea>
                 </div>

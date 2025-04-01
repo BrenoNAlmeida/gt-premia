@@ -6,7 +6,7 @@ use App\Models\feedback;
 use App\Http\Requests\StorefeedbackRequest;
 use App\Http\Requests\UpdatefeedbackRequest;
 
-class FeedbackController extends Controller
+class FeedbackController extends Controller 
 {
     /**
      * Display a listing of the resource.
@@ -63,7 +63,13 @@ class FeedbackController extends Controller
      */
     public function update(UpdatefeedbackRequest $request, feedback $feedback)
     {
-        dd($request->all());
+        $data = $request->all();
+        //atualiza o feedback
+        $feedback->feedback = $data['feedback'];
+        $feedback->valor_indicacao_id = $data['valor_id'];
+        $feedback->save();
+
+        return redirect()->route('usuarios.show', $feedback->user_id);
     }
 
     /**

@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\valor;
 use App\Models\carteira;
 use App\Models\premio;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class transacao extends Model
 {
     /** @use HasFactory<\Database\Factories\TransacaoFactory> */
-    use HasFactory;
+    use HasFactory;    use SoftDeletes;
+
 
     protected $table = 'transacoes';
 

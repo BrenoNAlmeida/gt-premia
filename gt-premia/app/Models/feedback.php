@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class feedback extends Model
 {
     /** @use HasFactory<\Database\Factories\FeedbackFactory> */
-    use HasFactory;
+    use HasFactory;    use SoftDeletes;
+
 
     protected $fillable = [
         'user_id',

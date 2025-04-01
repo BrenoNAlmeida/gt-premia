@@ -112,8 +112,25 @@ class UserController extends Controller
      */
     public function destroy(User $User)
     {
-        //
+        //deleta a carteira
+        $carteira = carteira::where('user_id', $User->id)->first();
+        if ($carteira) {
+            $carteira->delete();
+        }
+        //deleta o feedback
+        $feedbacks = feedback::where('user_id', $User->id)->get();
+        if ($feedbacks) {
+            foreach ($feedbacks as $feedback) {
+                $feedback->delete();
+            }
+        }
+        $User->delete();
+        
+        session()->flash('success', 'Usuario deletado com sucesso');
+        return redirect()->route('usuarios.index');
     }
+
+    
 
     public function resetar_senha(Request $request, User $user)
     {
