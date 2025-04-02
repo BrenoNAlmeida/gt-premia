@@ -7,22 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class carteira extends Model
+class feedback extends Model
 {
-    /** @use HasFactory<\Database\Factories\CarteiraFactory> */
-    use HasFactory;
-    use SoftDeletes;
+    /** @use HasFactory<\Database\Factories\FeedbackFactory> */
+    use HasFactory;    use SoftDeletes;
 
 
     protected $fillable = [
-        'id',
-        'saldo',
-        'saldo_retido',
         'user_id',
+        'valor_indicacao_id',
+        'feedback',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function valor_indicacao()
+    {
+        return $this->hasOne(Valor::class, 'id', 'valor_indicacao_id');
+    }
+
 }

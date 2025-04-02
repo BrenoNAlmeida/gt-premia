@@ -24,11 +24,19 @@
                                     <a href="{{ route('usuarios.edit', $usuario->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded mr-1">
                                         Editar
                                     </a>
-
-                                    <a href="{{ route('usuarios.show', $usuario->id) }}" class="bg-yellow-600 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded">
-                                        Detalhes
+                                    <a href="{{ route('usuarios.show', $usuario->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded mr-1">
+                                        Ver
                                     </a>
+                                    <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                                            Deletar
+                                        </button>
+                                    </form>
 
+
+                                    
                                 </td>
                             </tr>
                             @endforeach
