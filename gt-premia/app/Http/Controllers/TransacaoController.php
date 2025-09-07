@@ -16,7 +16,7 @@ class TransacaoController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('rg')){
+        if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('rh')){
             $transacoes = transacao::orderBy('status', 'desc')->get();
             return view('transacao.index', ['transacoes' => $transacoes]);
             

@@ -16,19 +16,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::get('/premio', [PremioController::class, 'index'])->name('premio.index');
-    Route::get('/premio/{premio}', [PremioController::class, 'show'])->name('premio.show');
-    Route::post('premio/{premio}/solicitar_retirada', [PremioController::class, 'solicitar_retirada'])->name('premio.solicitar_retirada');
-
-    Route::get('/transacao', [TransacaoController::class, 'index'])->name('transacao.index');
-
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-
-    
     Route::middleware(['role:rh|admin'])->group(function () { 
 
         //feedback
@@ -41,10 +28,10 @@ Route::middleware('auth')->group(function () {
 
 
         //  premio
-        Route::get('/premio/create', [PremioController::class, 'create'])->name('premio.create');
         Route::post('/premio/store', [PremioController::class, 'store'])->name('premio.store');
-        Route::get('/premio/{premio}/edit', [PremioController::class, 'edit'])->name('premio.edit');
+        Route::get('/premio/create', [PremioController::class, 'create'])->name('premio.create');
         Route::put('/premio/{premio}', [PremioController::class, 'update'])->name('premio.update');
+        Route::get('/premio/{premio}/edit', [PremioController::class, 'edit'])->name('premio.edit');
         Route::delete('/premio/{premio}', [PremioController::class, 'destroy'])->name('premio.destroy');
         
 
@@ -69,6 +56,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/transacao/{transacao}/reprovar', [TransacaoController::class, 'reprovar'])->name('transacao.reprovar');
         
     });
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/premio', [PremioController::class, 'index'])->name('premio.index');
+    Route::get('/premio/{premio}', [PremioController::class, 'show'])->name('premio.show');
+    Route::post('premio/{premio}/solicitar_retirada', [PremioController::class, 'solicitar_retirada'])->name('premio.solicitar_retirada');
+
+    Route::get('/transacao', [TransacaoController::class, 'index'])->name('transacao.index');
+
+    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
+
     
 
 
